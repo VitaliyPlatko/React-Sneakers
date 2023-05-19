@@ -1,0 +1,94 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.drawer {
+  position: absolute;
+  width: 385px;
+  height: 100vh;
+  right: 0;
+  background: #fff;
+  padding: 30px;
+}
+.drawer h2 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.text-wrap {
+  padding-right: 20px;
+}
+.text-wrap p {
+  font-size: 16px;
+  margin: 0px;
+}
+.text-wrap b {
+  font-weight: bold;
+}
+
+.wrap-buttom {
+  display: flex;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cardIMG {
+  width: 100px;
+  height: 100px;
+  padding-right: 10px;
+}
+
+.remove {
+  cursor: pointer;
+  opacity: 0.3;
+  width: 25px;
+  height: 25px;
+  transition: 0.3s;
+}
+.remove:hover {
+  opacity: 0.8;
+}
+
+.Total button {
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  height: 55px;
+  background-color: #9dd588;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.wrap-buttom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.suma {
+  font-weight: 700;
+}
+
+.tax {
+  font-weight: 700;
+}
+
+.price {
+  font-weight: normal;
+}
+.price span {
+  padding-left: 5px;
+}/*# sourceMappingURL=menu__right.css.map */

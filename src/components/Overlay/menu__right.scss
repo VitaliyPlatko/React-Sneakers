@@ -1,0 +1,88 @@
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0,0,0,0.5);
+    z-index: 1;
+}
+.drawer{
+    position: absolute;
+    width: 385px;
+    height: 100vh;
+    right: 0;
+    background: #fff;
+    padding: 30px;
+    h2{
+        font-size: 25px;
+        margin: 0;
+    }
+}
+.item{
+    height: 100vh;
+}
+.text-wrap{
+    padding-right:20px;
+    p{
+        font-size: 16px;
+        margin: 0px;
+    }
+    b{
+        font-weight: bold;
+    }
+}
+.wrap-buttom{
+    display: flex;
+}
+.cartItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.cardIMG{
+    width: 100px;
+    height: 100px;
+    padding-right: 10px;
+}
+.remove{
+    cursor: pointer;
+    opacity: .3;
+    width: 25px;
+    height: 25px;
+    transition: .3s;
+    &:hover{
+        opacity: .8;
+    }
+}
+.Total{
+    button{
+        border: none;
+        border-radius: 20px;
+        width: 100%;
+        height: 55px;
+        background-color: #9dd588;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+}
+.wrap-buttom{
+    display: flex;
+    justify-content: space-between;
+}
+.suma{
+    font-weight: 700;
+}
+.tax{
+    font-weight: 700;
+}
+.price{
+    font-weight: normal;
+    span{
+        padding-left: 5px;
+    }
+}

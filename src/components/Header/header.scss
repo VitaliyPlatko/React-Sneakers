@@ -1,0 +1,68 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__menu-left{
+  display: flex;
+  align-items: center;
+}
+.logo{
+  width: 80px;
+  height: 80px;
+  padding-right: 20px;
+}
+.header__title{
+  font-size: 25px;
+  margin: 0;
+}
+.header__discription{
+  opacity: .5;
+}
+.header__menu-right{
+  display: flex;
+  align-items: center;
+  gap: 0px 30px;
+}
+.cart{
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.person{
+  width: 20px;
+  height: 20px;
+}
+.title{
+  margin: 0;
+}
+.title__wrap{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  input{
+      opacity: .8;
+      height: 20px;
+      border: solid 1px rgb(224, 219, 219);
+      border-radius:10px;
+      padding-left: 10px;
+      outline: none;
+  }
+}
+
+.vidro{
+  position: absolute;
+  opacity: .5;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  transition: .5s;
+  &:hover{
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+  }
+}

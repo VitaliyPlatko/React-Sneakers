@@ -1,0 +1,64 @@
+.card {
+  width: 200px;
+  padding: 30px;
+  border-radius: 30px;
+  margin-top: 40px;
+  box-shadow: 0px 32px 45px -5px rgb(186, 186, 186);
+  transition: 0.5s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card button {
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+}
+
+.card__heart {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: 0.2s;
+}
+.card__heart:hover {
+  transform: scale(1.3);
+}
+.card__heart:active {
+  transform: scale(2);
+}
+
+.wrap-for-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card__img {
+  width: 200px;
+  height: 200px;
+}
+
+.card__title {
+  font-size: 16px;
+}
+
+.plus {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: 0.5s;
+}
+.plus:hover {
+  transform: scale(0.9);
+}
+.plus:active {
+  transform: scale(1.2);
+}
+
+.price__wrap p {
+  opacity: 0.5;
+  margin: 0;
+}
+.price__wrap b span {
+  padding-left: 10px;
+}/*# sourceMappingURL=Сard.css.map */
