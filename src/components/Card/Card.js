@@ -1,19 +1,27 @@
-import './Сard.scss' 
 import React from 'react';
+import './Сard.scss' 
 
-function Card({onFavorite, ImageURL, title, price, onPlus}){
-    //?Зміна картинки (плюса на галочку) при кліку на нього
+function Card({ImageURL, title, price, onPlus}){
+
+    //*----------------------------------------------------------------------------------------------------------------//
+    //?Зміна картинки (плюса на галочку) при кліку на нього і додавання елементів в корзину
     const [isAdded, setIsAdded] = React.useState(false)
-    
-    //?Функція буде додавати елементи в корзину і змінювати + на галочку
     const onClickPlus = () =>{
         onPlus({title, ImageURL, price})
         setIsAdded(!isAdded)
     }
+    //!-----------------------------------------------------------
+    //?Додавання елементів в обране
+    const [isFavorite, setIsFavorite]=React.useState(false)
+    const onClickFavorite=()=>{
+        setIsFavorite(!isFavorite)
+    }
+    //!-----------------------------------------------------------
+    //*----------------------------------------------------------------------------------------------------------------//
 
     return(
         <div className='card'>
-        <img className='card__heart' src="IMG/ICON/heart.png" alt='heart' onClick={onFavorite}></img>
+        <img className='card__heart' src={isFavorite ? 'IMG/ICON/liked.png':'IMG/ICON/heart.png'} onClick={onClickFavorite}></img>
         <img className='card__img' src={ImageURL}></img>
         <div className='card__title'>{title}</div>
             <div className='title__wrap'>

@@ -9,8 +9,9 @@ function Overlay({onClose, items, onRemove}){
           {/*Пропс закрвиає корзину при натисканні на хрестик*/}
           <img onClick={onClose} className='remove' src='IMG/ICON/remove3.png' alt='remove'></img>
         </div>
-          {/*Елементи в корзині*/}
-            <div className='Item'>
+        {items.length > 0 ?(
+        <div>
+          <div className='Item'>
               {items.map((obj)=>(
                   <div className='cartItem'>
                   <img className='cardIMG' src={obj.ImageURL} alt='photo'></img>
@@ -22,8 +23,6 @@ function Overlay({onClose, items, onRemove}){
                   </div>
               ))}
             </div>
-
-            {/*низ корзини*/}
             <div className='Total'>
               <div className='wrap-buttom'>
                 <div className='suma'>Сума</div>
@@ -33,8 +32,18 @@ function Overlay({onClose, items, onRemove}){
                 <div className='tax'>Податок</div>
                 <div className='price'>123<span>грн.</span></div>
               </div>
-              <button>Підтвердити замовлення</button>
+              <button className='totalBTN'>Підтвердити замовлення</button>
             </div>
+        </div>
+        ):(
+            <div className='cardEmpty'>
+              <img className='cardEmptyIMG' src='IMG/ICON/empty-box.jpg' alt='cartemptyimg'></img>
+              <h2>Корзина пуста</h2>
+              <p>Додайте хоча б одну пару кросівок в корзину, щоб зробити замовлення</p>
+              <button onClick={onClose} className='totalBTN'>Повернутись назад</button>
+            </div>
+            )
+        }
         </div>
       </div>
     )

@@ -23,16 +23,30 @@
   display: flex;
   align-items: center;
   gap: 0px 30px;
+  .cart{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    opacity: .5;
+  }
+  .person{
+    width: 20px;
+    height: 20px;
+    opacity: .5;
+  }
+  .favorite{
+    cursor: pointer;
+    opacity: .5;
+    width: 20px;
+    height: 20px;
+    transition: .3s;
+    &:hover{
+        transform: scale(1.3);
+    }
 }
-.cart{
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
 }
-.person{
-  width: 20px;
-  height: 20px;
-}
+
+
 .title{
   margin: 0;
 }
