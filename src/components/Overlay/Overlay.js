@@ -1,6 +1,6 @@
 import './menu__right.scss'
 
-function Overlay({onClose, items}){
+function Overlay({onClose, items, onRemove}){
     return(
         <div className='overlay'>
         <div className='drawer'>
@@ -18,7 +18,7 @@ function Overlay({onClose, items}){
                       <p>{obj.title}</p>
                       <b>{obj.price} грн</b>
                     </div>
-                    <img className='remove' src='IMG/ICON/remove.png' alt='remove'></img>
+                    <img onClick={()=>onRemove(obj.id)} className='remove' src='IMG/ICON/remove.png' alt='remove'></img>
                   </div>
               ))}
             </div>
