@@ -13,6 +13,7 @@ function Home({items, searchValue, setSearchValue, onAddToCard, onAddToFavorite,
                 {/*Фільтер використовується, щоб відображати карточки імя яких я пишу в пошуку*/}
                 {items.filter(item=>item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item, index)=>(
                     <Card
+                        id={item.id}
                         key={index}
                         ImageURL={item.ImageURL}
                         title={item.title}

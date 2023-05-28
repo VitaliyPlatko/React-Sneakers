@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Header(props){
     return(
         <div className="header">
-            <Link to={'/'}>
+            <Link to={'/'} className='link'>
                 <div className="header__menu-left">
                     <img className="logo" src="IMG/ICON/logo.png" alt='logo'></img>
                         <div className="header__wrapper">
@@ -16,7 +16,7 @@ function Header(props){
             <div className="header__menu-right">
                 <img className="cart" src="IMG/ICON/cart.png" onClick={props.onClickCart} alt="Корзина"></img>
                     <div className="price">1231 <span>$</span></div>
-                    <Link to='/Favorites'>
+                    <Link to='/Favorites' className='link'>
                         <img className="favorite" src='IMG/ICON/black-heart.png' alt='Закладки'></img>
                     </Link>
                 <img className="person" src="IMG/ICON/person.png" alt="Персона"></img>

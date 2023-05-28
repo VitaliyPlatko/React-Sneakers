@@ -13,7 +13,7 @@ function Overlay({onClose, items, onRemove}){
         <div>
           <div className='Item'>
               {items.map((obj)=>(
-                  <div className='cartItem'>
+                  <div key={obj.id} className='cartItem'>
                   <img className='cardIMG' src={obj.ImageURL} alt='photo'></img>
                     <div className='text-wrap'>
                       <p>{obj.title}</p>
