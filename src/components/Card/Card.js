@@ -1,13 +1,13 @@
 import React from 'react';
+//!----------------------------------------------Крок 1
+import ContentLoader from 'react-content-loader'
 import './Сard.scss' 
-//!---------------------id
-function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false}){
 
+function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, added=false, loading=false}){
     //*----------------------------------------------------------------------------------------------------------------//
     //?Зміна картинки (плюса на галочку) при кліку на нього і додавання елементів в корзину
-    const [isAdded, setIsAdded] = React.useState(false)
+    const [isAdded, setIsAdded] = React.useState(added)
     const onClickPlus = () =>{
-        //!-----------------------------id
         onPlus({id, title, ImageURL, price})
         setIsAdded(!isAdded)
     }
@@ -18,22 +18,44 @@ function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false})
         setIsFavorite(!isFavorite);
     }
     //*----------------------------------------------------------------------------------------------------------------//
-
+    
+//!------------------------------------------------------Крок 2
     return(
         <div className='card'>
-        <img className='card__heart' src={isFavorite ? 'IMG/ICON/liked.png':'IMG/ICON/heart.png'} onClick={onClickFavorite}></img>
-        <img className='card__img' src={ImageURL}></img>
-        <div className='card__title'>{title}</div>
-            <div className='title__wrap'>
-                <div className='price__wrap'>
-                    <p>Ціна:</p>
-                    <b>{price}<span>грн.</span></b>
-                </div>
-                {/*При натисканні на onClickPlus буде вмкликатись функція, яка буде змінювати плюс на галочку і додавати обєкти в корзину*/}
-                <img className='plus' onClick={onClickPlus} src={isAdded ? 'IMG/ICON/added.png':'IMG/ICON/plus.png'} alt='Plus'></img>
-            </div>
+            {
+                loading ? (<ContentLoader 
+                speed={2}
+                width={180}
+                height={260}
+                viewBox="0 0 180 265"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+                >
+                <rect x="1" y="0" rx="10" ry="10" width="180" height="155" /> 
+                <rect x="0" y="195" rx="5" ry="5" width="100" height="15" /> 
+                <rect x="0" y="234" rx="5" ry="5" width="90" height="25" /> 
+                <rect x="150" y="230" rx="10" ry="10" width="30" height="30" /> 
+                <rect x="0" y="170" rx="5" ry="5" width="170" height="15" />
+                </ContentLoader>
+                ) : (
+                <>
+                <img className='card__heart' src={isFavorite ? 'IMG/ICON/liked.png':'IMG/ICON/heart.png'} onClick={onClickFavorite}></img>
+                <img className='card__img' src={ImageURL}></img>
+                <div className='card__title'>{title}</div>
+                    <div className='title__wrap'>
+                        <div className='price__wrap'>
+                            <p>Ціна:</p>
+                            <b>{price}<span>грн.</span></b>
+                        </div>
+                        {/*При натисканні на onClickPlus буде вмкликатись функція, яка буде змінювати плюс на галочку і додавати обєкти в корзину*/}
+                        <img className='plus' onClick={onClickPlus} src={isAdded ? 'IMG/ICON/added.png':'IMG/ICON/plus.png'} alt='Plus'></img>
+                    </div>
+                </>
+                )
+            }
         </div>
     )
+//!------------------------------------------------------
 }
 
 export default Card
