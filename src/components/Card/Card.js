@@ -1,13 +1,11 @@
 import React from 'react';
 import './Сard.scss' 
-//!---------------------id
-function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false}){
+function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, added=false}){
 
     //*----------------------------------------------------------------------------------------------------------------//
     //?Зміна картинки (плюса на галочку) при кліку на нього і додавання елементів в корзину
-    const [isAdded, setIsAdded] = React.useState(false)
+    const [isAdded, setIsAdded] = React.useState(added)
     const onClickPlus = () =>{
-        //!-----------------------------id
         onPlus({id, title, ImageURL, price})
         setIsAdded(!isAdded)
     }
