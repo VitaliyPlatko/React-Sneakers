@@ -5,6 +5,7 @@ import Header from './components/Header/Header'
 import Overlay from './components/Overlay/Overlay'
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import AppContext from './Context';
 
 function App() {
 
@@ -72,34 +73,36 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
-      {/* Використовується для відображення корзини при кліку на неї*/}
-      {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}
-      <Header onClickCart={()=>setCartOpened(true)} />
-      <Routes>
-        <Route path="/" element={
-            <Home
-              items={items}
-              searchValue={searchValue}
-              cartItems={cartItems}
-              setSearchValue={setSearchValue}
-              onAddToCard={onAddToCard}
-              onAddToFavorite={onAddToFavorite}
-              onChangeShearchInput={onChangeShearchInput}
-            />
-          }
-        />
-      </Routes>
-      <Routes>
-          <Route path="/Favorites" element={
-            <Favorites
-              items={favorites}
-              onAddToFavorite={onAddToFavorite}
-            />
-          }
-        />
-      </Routes>
-    </div>
+    <AppContext.Provider value={{items, cartItems, favorites}}>
+        <div className="wrapper">
+        {/* Використовується для відображення корзини при кліку на неї*/}
+        {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}
+        <Header onClickCart={()=>setCartOpened(true)} />
+        <Routes>
+          <Route path="/" element={
+              <Home
+                items={items}
+                searchValue={searchValue}
+                cartItems={cartItems}
+                setSearchValue={setSearchValue}
+                onAddToCard={onAddToCard}
+                onAddToFavorite={onAddToFavorite}
+                onChangeShearchInput={onChangeShearchInput}
+              />
+            }
+          />
+        </Routes>
+        <Routes>
+            <Route path="/Favorites" element={
+              <Favorites
+                items={favorites}
+                onAddToFavorite={onAddToFavorite}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   )
 }
 export default App;
