@@ -1,9 +1,10 @@
+import React from 'react';
 import Card from '../components/Card/Card';
 
-function Home({items, searchValue, setSearchValue, onAddToCard, onAddToFavorite, onChangeShearchInput, cartItems, isLoading}){ 
+function Home({items, searchValue, setSearchValue, onAddToCard, onAddToFavorite, onChangeShearchInput, isLoading}){ 
+
     const renderItems = () =>{
         const filteredItems = items.filter((item)=>item.title.toLowerCase().includes(searchValue.toLowerCase()));
-        //якщо йду загрузка, то рендери 10 штук або верни то, що в бекенді
         return (isLoading ? [...Array(8)] : filteredItems).map((item, index)=>(
             <Card
                 id={item.id}
@@ -13,7 +14,6 @@ function Home({items, searchValue, setSearchValue, onAddToCard, onAddToFavorite,
                 price={item.price}
                 onFavorite={(obj)=>onAddToFavorite(obj)}
                 onPlus={(obj)=>onAddToCard(obj)}
-                added={cartItems.some(obj=>Number(obj.id)===Number(item.id))}
                 loading={isLoading}
             />
         ))

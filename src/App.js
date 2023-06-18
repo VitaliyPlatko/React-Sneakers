@@ -57,6 +57,7 @@ function App() {
     try {
       if(favorites.find((favObj)=>favObj.id === obj.id)){
         axios.delete(`https://64610008185dd9877e34f663.mockapi.io/cart/${obj.id}`)//запит на видалення
+        setFavorites((prev)=>prev.filter(item=>Number(item.id)!==Number(obj.id)));
       } else {
         const {data} = await axios.post('https://64610008185dd9877e34f663.mockapi.io/cart', obj);//дочекайся відповіді і пезультат запиши в змінну data
         setFavorites((prev)=>[...prev, data]);
@@ -72,8 +73,13 @@ function App() {
     setCartItems((prev) => prev.filter(item => item.id !== id));
   }
 
+  //?Функція перевіряє чи є товар в корзині і залежно від того рендерить + або галочку
+  const isItemAdded = (id) => {
+    return cartItems.some(obj=>Number(obj.id)===Number(id))
+  }
+
   return (
-    <AppContext.Provider value={{items, cartItems, favorites}}>
+    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded}}>
         <div className="wrapper">
         {/* Використовується для відображення корзини при кліку на неї*/}
         {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}

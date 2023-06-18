@@ -1,14 +1,13 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader'
 import './Сard.scss' 
+import AppContext from '../../Context';
 
-function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, added=false, loading=false}){
-    //*----------------------------------------------------------------------------------------------------------------//
+function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, loading=false}){
+
     //?Зміна картинки (плюса на галочку) при кліку на нього і додавання елементів в корзину
-    const [isAdded, setIsAdded] = React.useState(added)
     const onClickPlus = () =>{
         onPlus({id, title, ImageURL, price})
-        setIsAdded(!isAdded)
     }
     //?Додавання елементів в обране
     const [isFavorite, setIsFavorite]=React.useState(favorited)
@@ -16,7 +15,9 @@ function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, 
         onFavorite({id, title, ImageURL, price});
         setIsFavorite(!isFavorite);
     }
-    //*----------------------------------------------------------------------------------------------------------------//
+    //? Витягую цю функцію з AppContext
+    const {isItemAdded} = React.useContext(AppContext)
+    console.log(title, isItemAdded(id));
     
     return(
         <div className='card'>
@@ -45,8 +46,7 @@ function Card({id, ImageURL, title, price, onPlus, onFavorite, favorited=false, 
                             <p>Ціна:</p>
                             <b>{price}<span>грн.</span></b>
                         </div>
-                        {/*При натисканні на onClickPlus буде вмкликатись функція, яка буде змінювати плюс на галочку і додавати обєкти в корзину*/}
-                        <img className='plus' onClick={onClickPlus} src={isAdded ? 'IMG/ICON/added.png':'IMG/ICON/plus.png'} alt='Plus'></img>
+                        <img className='plus' onClick={onClickPlus} src={isItemAdded(id) ? 'IMG/ICON/added.png':'IMG/ICON/plus.png'} alt='Plus'></img>
                     </div>
                 </>
                 )
