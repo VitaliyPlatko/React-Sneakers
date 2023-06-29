@@ -73,13 +73,8 @@ function App() {
     setCartItems((prev) => prev.filter(item => item.id !== id));
   }
 
-  //?Функція перевіряє чи є товар в корзині і залежно від того рендерить + або галочку
-  const isItemAdded = (id) => {
-    return cartItems.some(obj=>Number(obj.id)===Number(id))
-  }
-
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded}}>
+    <AppContext.Provider value={{items, cartItems, favorites}}>
         <div className="wrapper">
         {/* Використовується для відображення корзини при кліку на неї*/}
         {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}
