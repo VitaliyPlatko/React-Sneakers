@@ -5,6 +5,7 @@ import Header from './components/Header/Header'
 import Overlay from './components/Overlay/Overlay'
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import {AppContext} from './Context';
 
 function App() {
 
@@ -48,7 +49,6 @@ function App() {
       }
     }
 
-
   //?Додавання елементів в обране і в бекенд
   const [favorites, setFavorites] = React.useState([]);
   const onAddToFavorite=async(obj)=>{
@@ -73,7 +73,8 @@ function App() {
   }
 
   return (
-        <div className="wrapper">
+    <AppContext.Provider value={{setCartOpened, setCartItems, cartItems}}>
+      <div className="wrapper">
         {/* Використовується для відображення корзини при кліку на неї*/}
         {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}
         <Header onClickCart={()=>setCartOpened(true)} />
@@ -101,6 +102,7 @@ function App() {
           />
         </Routes>
       </div>
+    </AppContext.Provider>
   )
 }
 export default App;
