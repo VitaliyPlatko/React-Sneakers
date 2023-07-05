@@ -6,6 +6,7 @@ import Overlay from './components/Overlay/Overlay'
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import {AppContext} from './Context';
+import Orders from './pages/Orders';
 
 function App() {
 
@@ -98,6 +99,12 @@ function App() {
                 items={favorites}
                 onAddToFavorite={onAddToFavorite}
               />
+            }
+          />
+        </Routes>
+        <Routes>
+            <Route path="/Orders" element={
+              <Orders/>
             }
           />
         </Routes>

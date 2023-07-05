@@ -1,17 +1,16 @@
 import React from 'react'
 import './menu__right.scss'
-import { AppContext } from '../../Context';
 import Info from '../Info';
 import axios from 'axios';
+import { useCart } from '../../hooks/useCart';
 
 const delay = (ms) => new Promise((resolve)=>setTimeout(resolve, ms))
 
 function Overlay({onClose, items=[], onRemove}){
-
-  const {cartItems ,setCartItems} = React.useContext(AppContext)
+  const {cartItems, setCartItems, totalPrice} = useCart()
   const [isOrderComplete, setIsOrderComplete]=React.useState(false);
   const [orderId, setOrderId]=React.useState(null);
-  const totalPrice = cartItems.reduce((sum, obj)=>obj.price+sum, 0)
+  
 
   const onClickOrder = async ()=>{
     try {

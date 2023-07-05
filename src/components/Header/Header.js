@@ -1,12 +1,10 @@
 import React from 'react';
-import {AppContext} from '../../Context';
 import './header.scss'
 import {Link} from "react-router-dom";
+import {useCart} from '../../hooks/useCart';
 
 function Header(props){
-
-    const {cartItems} = React.useContext(AppContext)
-    const totalPrice = cartItems.reduce((sum, obj)=>obj.price+sum, 0)
+    const {totalPrice} = useCart()
 
     return(
         <div className="header">
@@ -25,7 +23,10 @@ function Header(props){
                     <Link to='/Favorites' className='link'>
                         <img className="favorite" src='IMG/ICON/black-heart.png' alt='Закладки'></img>
                     </Link>
-                <img className="person" src="IMG/ICON/person.png" alt="Персона"></img>
+                    <Link to={'/Orders'}>
+                        <img className="person" src="IMG/ICON/person.png" alt="Персона"></img>
+                    </Link>
+                
             </div>
         </div>
     )
