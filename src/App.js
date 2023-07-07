@@ -1,24 +1,47 @@
 import React from 'react';
-import {Route, Routes} from "react-router";
 import axios from 'axios';
+
+import {Route, Routes} from "react-router";
+import {AppContext} from './Context';
+
 import Header from './components/Header/Header'
 import Overlay from './components/Overlay/Overlay'
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
-import {AppContext} from './Context';
 import Orders from './pages/Orders';
 
 function App() {
+  //?Отримую дані з моїх замовлень
+  const [orders, setOrders] = React.useState([])
+
+  React.useEffect(()=>{
+    (async()=>{
+      try {
+        const {data} = await axios.get('https://64970a4a83d4c69925a35c43.mockapi.io/Orders')
+        setOrders(data.reduce((prev, obj) => [...prev, ...obj.items],[]))
+      } catch (error) {
+        alert('Помилки при запиті замовлень')
+        console.error(error);
+      }
+    })()
+  },[])
 
   //?Створення масиву для відображення даних з Backend
   const [items, setItems] = React.useState([]);
-  
   React.useEffect(()=>{
     async function fetchData(){
-      const itemsResponse = await axios.get('https://64610008185dd9877e34f663.mockapi.io/items')
-      const cartRespone = await axios.get('https://64610008185dd9877e34f663.mockapi.io/cart')
-      setItems(itemsResponse.data)
-      setCartItems(cartRespone.data)
+      try {
+        const [itemsResponse, cartRespone] = await Promise.all([
+          axios.get('https://64610008185dd9877e34f663.mockapi.io/items'),
+          axios.get('https://64610008185dd9877e34f663.mockapi.io/cart')
+        ])
+        setItems(itemsResponse.data)
+        setCartItems(cartRespone.data)
+      } catch (error) {
+        alert('Помилка при запиті даних')
+        console.error(error);
+      }
+
     }
     fetchData()
   },[])
@@ -35,21 +58,21 @@ function App() {
 
   //?Додавання елементів в корзину і на бекенд
   const [cartItems, setCartItems] = React.useState([]);
-  //?Функція додавання товару в корзину
-    const onAddToCard=(obj)=>{
+    const onAddToCard=async(obj)=>{
       try {
         if(cartItems.find((item)=>Number(item.id) === Number(obj.id))){
-          axios.delete('https://64610008185dd9877e34f663.mockapi.io/cart/', obj.id)           //якщо в корзині є такий товар, то видали
+          await axios.delete('https://64610008185dd9877e34f663.mockapi.io/cart/', obj.id)           //якщо в корзині є такий товар, то видали
           setCartItems((prev)=>prev.filter(item=>Number(item.id)!==Number(obj.id)));
         } else{                                                                               //якщо його немає то відправ запит на бекенд і збережи його там
           axios.post('https://64610008185dd9877e34f663.mockapi.io/cart/', obj)                //створи товар в бекенді
           setCartItems((prev)=>[...prev, obj]);                                               // створи товар в корзині
         }
       } catch (error) {
-        alert('Помилка')
+        alert('не получилось додати в корзину')
+        console.error(error);
       }
     }
-
+    
   //?Додавання елементів в обране і в бекенд
   const [favorites, setFavorites] = React.useState([]);
   const onAddToFavorite=async(obj)=>{
@@ -63,18 +86,25 @@ function App() {
         setFavorites((prev)=>[...prev, data]);
       }
     } catch (error) {
-      alert('ERROR')
+      alert('Помилка при додаванні в обране')
+      console.error(error);
     }
   }
 
   //?Функція видалення товару з корзини
   const onRemoveItem=(id)=>{
-    axios.delete(`https://64610008185dd9877e34f663.mockapi.io/cart/${id}`)
-    setCartItems((prev) => prev.filter(item => item.id !== id));
+    try {
+      axios.delete(`https://64610008185dd9877e34f663.mockapi.io/cart/${id}`)
+      setCartItems((prev) => prev.filter(item => item.id !== id));
+    } catch (error) {
+      alert('Помилка при видаленні з корзини')
+      console.error(error);
+    }
+
   }
 
   return (
-    <AppContext.Provider value={{setCartOpened, setCartItems, cartItems}}>
+    <AppContext.Provider value={{setCartOpened, setCartItems, cartItems, onAddToCard, onAddToFavorite, orders}}>
       <div className="wrapper">
         {/* Використовується для відображення корзини при кліку на неї*/}
         {cartOpened && <Overlay items={cartItems} onClose={()=>setCartOpened(false)} onRemove={onRemoveItem}/>}

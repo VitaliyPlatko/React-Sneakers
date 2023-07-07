@@ -4,33 +4,33 @@ import Info from '../Info';
 import axios from 'axios';
 import { useCart } from '../../hooks/useCart';
 
-const delay = (ms) => new Promise((resolve)=>setTimeout(resolve, ms))
+//const delay = (ms) => new Promise((resolve)=>setTimeout(resolve,ms))
 
 function Overlay({onClose, items=[], onRemove}){
   const {cartItems, setCartItems, totalPrice} = useCart()
   const [isOrderComplete, setIsOrderComplete]=React.useState(false);
   const [orderId, setOrderId]=React.useState(null);
-  
 
   const onClickOrder = async ()=>{
     try {
       const { data } = await axios.post('https://64970a4a83d4c69925a35c43.mockapi.io/Orders', {
         items: cartItems,
       });
-      setOrderId(data.id)
-      setIsOrderComplete(true)
-      setCartItems([])
-      
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems();
+
+      //!ПРОБЛЕМА В ЦИКЛІ
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete('https://64610008185dd9877e34f663.mockapi.io/cart' + item.id)
-        await delay(1000)
+        await axios.delete('https://64610008185dd9877e34f663.mockapi.io/cart/'+item.id)
       }
+
     } catch (error) {
       alert('Не вдалось створити замовлення')
     }
   }
-  
+
     return(
         <div className='overlay'>
         <div className='drawer'>
@@ -70,7 +70,7 @@ function Overlay({onClose, items=[], onRemove}){
               title={isOrderComplete ? 'Замовлення оформлене' : 'Корзина пуста'}
               discription={isOrderComplete 
                 ? `Ваше замовлення #${orderId} буде передане курєрській доставці`
-                : 'Додайте хоча б 1 пару кросіок щоб зробити замовлення'
+                : 'Додайте хоча б 1 пару кросівок щоб зробити замовлення'
               }
               image={isOrderComplete ? '/IMG/ICON/orderComplete.png':'/IMG/ICON/empty-box.jpg'}
             />

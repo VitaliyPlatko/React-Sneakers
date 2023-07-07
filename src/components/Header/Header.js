@@ -26,7 +26,6 @@ function Header(props){
                     <Link to={'/Orders'}>
                         <img className="person" src="IMG/ICON/person.png" alt="Персона"></img>
                     </Link>
-                
             </div>
         </div>
     )
